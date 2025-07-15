@@ -1,50 +1,47 @@
 #include "push_swap.h"
 
-// Swaps first two elements of a stack | sa and sb
 int	swap(t_list **stack)
 {
-	t_list	*head;
+	t_list	*node;
 	t_list	*next;
-	int		tmp_val;
-	int		tmp_index;
+	int		tmpv;
+	int		tmpi;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);
-	head = *stack;
-	next = head->next;
-	if (!head && !next)
-		ft_error("Error occured while swapping!");
-	tmp_val = head->value;
-	tmp_index = head->index;
-	head->value = next->value;
-	head->index = next->index;
-	next->value = tmp_val;
-	next->index = tmp_index;
+	node = *stack;
+	next = node->next;
+	if (!node || !next)
+		ft_error("Error");
+	tmpv = node->value;
+	tmpi = node->index;
+	node->value = next->value;
+	node->index = next->index;
+	next->value = tmpv;
+	next->index = tmpi;
 	return (0);
 }
 
-int	sa(t_list **stack_a)
+int	sa(t_list **stack)
 {
-	if (swap(stack_a) == -1)
+	if (swap(stack))
 		return (-1);
 	ft_putendl_fd("sa", 1);
 	return (0);
 }
 
-int	sb(t_list **stack_b)
+int	sb(t_list **stack)
 {
-	if (swap(stack_b) == -1)
+	if (swap(stack))
 		return (-1);
 	ft_putendl_fd("sb", 1);
 	return (0);
 }
 
 int	ss(t_list **stack_a, t_list **stack_b)
-{	
-	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+{
+	if (swap(stack_a) || swap(stack_b))
 		return (-1);
-	swap(stack_a);
-	swap(stack_b);
 	ft_putendl_fd("ss", 1);
 	return (0);
 }
