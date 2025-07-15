@@ -1,58 +1,56 @@
 #include "push_swap.h"
 
-void	ft_free(char **str)
+void	ft_free(char **args)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
-		free(str[i--]);
+	while (args[i])
+		free(args[i++]);
+	free(args);
 }
 
 int	is_sorted(t_list **stack)
 {
-	t_list	*head;
+	t_list	*node;
 
-	head = *stack;
-	while (head && head->next)
+	node = *stack;
+	while (node && node->next)
 	{
-		if (head->index > head->next->index)
+		if (node->index > node->next->index)
 			return (0);
-		head = head->next;
+		node = node->next;
 	}
 	return (1);
 }
 
 int	get_distance(t_list **stack, int index)
 {
-	t_list	*head;
+	t_list	*node;
 	int		distance;
 
 	distance = 0;
-	head = *stack;
-	while (head)
+	node = *stack;
+	while (node)
 	{
-		if (head->index == index)
+		if (node->index == index)
 			break ;
 		distance++;
-		head = head->next;
+		node = node->next;
 	}
 	return (distance);
 }
 
 void	make_top(t_list **stack, int distance)
 {
-	t_list	*head;
+	t_list	*node;
 	int		tmp;
 	int		size;
 
-	if (distance == 0)
+	if (!distance)
 		return ;
-	
-	head = *stack;
-	size = ft_lstsize(head);
+	node = *stack;
+	size = ft_lstsize(node);
 	tmp = size - distance;
 	if (distance <= (size / 2))
 	{
@@ -68,14 +66,14 @@ void	make_top(t_list **stack, int distance)
 
 void	stack_free(t_list **stack)
 {
-	t_list	*head;
+	t_list	*node;
 	t_list	*tmp;
 
-	head = *stack;
-	while (head)
+	node = *stack;
+	while (node)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = node;
+		node = node->next;
 		free(tmp);
 	}
 	free(stack);
