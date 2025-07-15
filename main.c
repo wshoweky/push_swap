@@ -1,11 +1,10 @@
 #include "push_swap.h"
 
-// Creates new node and returns the pointer of it
 t_list	*ft_lstnew(int value)
 {
 	t_list	*new;
 
-	new = (t_list *) malloc(sizeof(*new));
+	new = (t_list *)malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
 	new->value = value;
@@ -14,33 +13,31 @@ t_list	*ft_lstnew(int value)
 	return (new);
 }
 
-// Initializes the stack
-static void stack_init(t_list **stack, int argc, char **argv)
+static void	stack_init(t_list **stack_a, int argc, char **argv)
 {
-	t_list	*new;
+	t_list	*node;
 	char	**args;
 	int		i;
 
 	i = 0;
 	if (argc == 2)
-		args = ft_split(argv[1], ' ');
+		args = ft_split(argv[1], 32);
 	else
 	{
-		i = 1;
+		i++;
 		args = argv;
 	}
 	while (args[i])
 	{
-		new = ft_lstnew(ft_atoi(args[i]));
-		ft_lstadd_back(stack, new);
+		node = ft_lstnew(ft_atoi(args[i]));
+		ft_lstadd_back(stack_a, node);
 		i++;
 	}
-	index_stack(stack);
+	stack_index(stack_a);
 	if (argc == 2)
 		ft_free(args);
 }
 
-// Sorts the stack
 static void	stack_sort(t_list **stack_a, t_list **stack_b)
 {
 	if (ft_lstsize(*stack_a) <= 5)
@@ -49,19 +46,22 @@ static void	stack_sort(t_list **stack_a, t_list **stack_b)
 		radix_sort(stack_a, stack_b);
 }
 
-// Main function
 int	main(int argc, char **argv)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;
 
-	if (argc < 2)
-		return (-1);
 	ft_check_args(argc, argv);
 	stack_a = (t_list **)malloc(sizeof(t_list));
 	stack_b = (t_list **)malloc(sizeof(t_list));
-	*stack_a = NULL;
-	*stack_b = NULL;
+	if (!stack_a || !stack_b)
+	{
+		stack_free(stack_a);
+		stack_free(stack_b);
+		return (0);
+	}
+	*stack_a = 0;
+	*stack_b = 0;
 	stack_init(stack_a, argc, argv);
 	if (is_sorted(stack_a))
 	{
@@ -74,4 +74,3 @@ int	main(int argc, char **argv)
 	stack_free(stack_b);
 	return (0);
 }
-
