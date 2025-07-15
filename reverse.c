@@ -1,51 +1,48 @@
 #include "push_swap.h"
 
-// Shifts down all elements of a stack by 1. The last element becomes the first one | rra and rrb
 int	reverse_rotate(t_list **stack)
 {
-	t_list	*head;
-	t_list	*tail;
+	t_list	*first;
+	t_list	*last;
 
 	if (ft_lstsize(*stack) < 2)
-		return (-1);
-	head = *stack;
-	tail = ft_lstlast(head);
-	while (head)
+		return (0);
+	first = *stack;
+	last = ft_lstlast(*stack);
+	while (first)
 	{
-		if (head->next->next == NULL)
+		if (first->next->next == 0)
 		{
-			 head->next = NULL;
-			 break ;
+			first->next = 0;
+			break ;
 		}
-		head = head->next;
+		first = first->next;
 	}
-	tail->next = *stack;
-	*stack = tail;
-	return (0);
+	last->next = *stack;
+	*stack = last;
+	return (1);
 }
 
 int	rra(t_list **stack_a)
 {
-	if (reverse_rotate(stack_a) == -1)
-		return (-1);
+	if (!reverse_rotate(stack_a))
+		return (0);
 	ft_putendl_fd("rra", 1);
-	return (0);
+	return (1);
 }
 
 int	rrb(t_list **stack_b)
 {
-	if (reverse_rotate(stack_b) == -1)
-		return (-1);
+	if (!reverse_rotate(stack_b))
+		return (0);
 	ft_putendl_fd("rrb", 1);
-	return (0);
+	return (1);
 }
 
 int	rrr(t_list **stack_a, t_list **stack_b)
 {
-	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
-		return (-1);
-	reverse_rotate(stack_a);
-	reverse_rotate(stack_b);
+	if (!(reverse_rotate(stack_a)) || !(reverse_rotate(stack_b)))
+		return (0);
 	ft_putendl_fd("rrr", 1);
-	return (0);
+	return (1);
 }
