@@ -2,39 +2,35 @@
 
 static t_list	*get_next_min(t_list **stack)
 {
-	t_list	*head;
+	t_list	*node;
 	t_list	*min;
 	int		has_min;
 
-	min = NULL;
+	min = 0;
 	has_min = 0;
-	head = *stack;
-	if (head)
+	node = *stack;
+	while (node)
 	{
-		while (head)
+		if ((node->index == -1) && (has_min == 0 || node->value < min->value))
 		{
-			if ((head->index == -1) && (!has_min || head->value < min->value))
-			{
-				min = head;
-				has_min = 1;
-			}
-			head = head->next;
+			min = node;
+			has_min = 1;
 		}
+		node = node->next;
 	}
 	return (min);
 }
 
-void	index_stack(t_list **stack)
+void	stack_index(t_list **stack)
 {
-	t_list	*head;
+	t_list	*node;
 	int		index;
 
 	index = 0;
-	head = get_next_min(stack);
-	while (head)
+	node = get_next_min(stack);
+	while (node)
 	{
-		head->index = index++;
-		head = get_next_min(stack);
+		node->index = index++;
+		node = get_next_min(stack);
 	}
 }
-
