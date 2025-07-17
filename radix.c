@@ -6,7 +6,7 @@
 /*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:59:43 by wshoweky          #+#    #+#             */
-/*   Updated: 2025/07/15 15:53:18 by wshoweky         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:30:35 by wshoweky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,24 @@ static int	get_max_bits(t_list **stack)
 
 void	radix_sort(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*node;
 	int		i;
 	int		n;
 	int		size;
 	int		max_bits;
 
 	i = 0;
-	node = *stack_a;
-	size = ft_lstsize(node);
+	size = ft_lstsize(*stack_a);
 	max_bits = get_max_bits(stack_a);
 	while (i < max_bits)
 	{
 		n = 0;
-		while (n++ < size)
+		while (n < size)
 		{
-			if ((node->index >> i) & 1)
+			if (((*stack_a)->index >> i) & 1)
 				ra(stack_a);
 			else
 				pb(stack_b, stack_a);
+			n++;
 		}
 		while (ft_lstsize(*stack_b))
 			pa(stack_a, stack_b);
