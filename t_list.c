@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_list.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 16:22:37 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 16:24:11 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*ft_lstlast(t_list *node)
@@ -5,18 +17,16 @@ t_list	*ft_lstlast(t_list *node)
 	if (!node)
 		return (0);
 	while (node->next)
-	{
 		node = node->next;
-		if (!(node->next))
-			return (node);
-	}
-	return (0);
+	return (node);
 }
 
 void	ft_lstadd_back(t_list **stack, t_list *node)
 {
 	t_list	*last;
 
+	if (!stack || !node)
+		return ;
 	if (*stack)
 	{
 		last = ft_lstlast(*stack);
@@ -35,6 +45,8 @@ int	ft_lstsize(t_list *node)
 	int	n;
 
 	n = 0;
+	if (!node)
+		return (0);
 	while (node)
 	{
 		n++;
