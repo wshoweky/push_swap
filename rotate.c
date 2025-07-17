@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 16:20:23 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 16:20:46 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	rotate(t_list	**stack)
@@ -5,7 +17,7 @@ int	rotate(t_list	**stack)
 	t_list	*first;
 	t_list	*last;
 
-	if (ft_lstsize(*stack) < 2)
+	if (!stack || !*stack || ft_lstsize(*stack) < 2)
 		return (0);
 	first = *stack;
 	last = ft_lstlast(*stack);
