@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 16:07:25 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 17:35:00 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_error(char *msg)
 {
-	ft_putendl_fd(msg, 1);
+	ft_putendl_fd(msg, 2);
 	exit(1);
 }
 
@@ -17,17 +29,17 @@ static int	ft_duplicates(int num, char **argv, int i)
 	}
 	return (1);
 }
-/*
+
 static int	ft_isnum(char *num)
 {
-	int		i;
-	long	tmp;
+	int			i;
+	long long	tmp;
 
 	i = 0;
 	tmp = ft_atoi(num);
 	if (tmp < -2147483648 || tmp > 2147483647)
-		ft_error("Error");
-	if (num[0] == '-' || num[0] == '+')
+		return (0);
+	if (num[i] == '-' || num[i] == '+')
 		i++;
 	while (num[i])
 	{
@@ -40,13 +52,11 @@ static int	ft_isnum(char *num)
 
 void	ft_check_args(int argc, char **argv)
 {
-	char	**args;
-	int		i;
-	long	tmp;
+	int			i;
+	char		**args;
+	long long	tmp;
 
 	i = 0;
-	if (argc < 2)
-		exit (-1);
 	if (argc == 2)
 		args = ft_split(argv[1], 32);
 	else
@@ -57,18 +67,24 @@ void	ft_check_args(int argc, char **argv)
 	while (args[i])
 	{
 		tmp = ft_atoi(args[i]);
-		if (!ft_isnum(args[i]))
+		if (!ft_isnum(args[i]) || !ft_duplicates(tmp, args, i))
+		{
+			if (argc == 2)
+				ft_free(args);
 			ft_error("Error");
-		if (ft_duplicates(tmp, args, i))
-			ft_error("Error");
+		}
 		i++;
 	}
 	if (argc == 2)
 		ft_free(args);
 }
-		*/
-
-
+/*
+		if (!ft_duplicates(tmp, args, i))
+		{
+			if (argc == 2)
+				ft_free(args);
+			ft_error("Error");
+		}
 static int	ft_isnum(char *num)
 {
 	int	i;
@@ -107,10 +123,11 @@ void	ft_check_args(int argc, char **argv)
 			ft_error("Error");
 		if (!ft_duplicates(tmp, args, i))
 			ft_error("Error");
-	//	if (tmp < -2147483648 || tmp > 2147483647)
-	//		ft_error("Error");
+		if (tmp < -2147483648 || tmp > 2147483647)
+			ft_error("Error");
 		i++;
 	}
 	if (argc == 2)
 		ft_free(args);
 }
+*/
