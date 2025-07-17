@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 16:21:01 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 18:13:17 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	get_min(t_list **stack)
@@ -16,7 +28,7 @@ static int	get_min(t_list **stack)
 	return (min);
 }
 
-static void	sort3(t_list **stack)
+static void	sort_three(t_list **stack)
 {
 	int	a;
 	int	b;
@@ -58,7 +70,7 @@ static void	sort_small(t_list **stack_a, t_list **stack_b, int size)
 	}
 	if (size == 3)
 	{
-		sort3(stack_a);
+		sort_three(stack_a);
 		return ;
 	}
 	min = get_min(stack_a);
@@ -73,6 +85,10 @@ void	simple_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 
+	if (!stack_a || !*stack_a)
+		return ;
 	size = ft_lstsize(*stack_a);
+	if (size < 2)
+		return ;
 	sort_small(stack_a, stack_b, size);
 }
