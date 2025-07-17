@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 16:03:45 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 18:09:03 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*ft_lstnew(int value)
@@ -40,6 +52,14 @@ static void	stack_init(t_list **stack_a, int argc, char **argv)
 
 static void	stack_sort(t_list **stack_a, t_list **stack_b)
 {
+	if (!stack_a || !*stack_a)
+		return ;
+	if (is_sorted(stack_a))
+	{
+		stack_free(stack_a);
+		stack_free(stack_b);
+		exit (0);
+	}
 	if (ft_lstsize(*stack_a) <= 5)
 		simple_sort(stack_a, stack_b);
 	else
@@ -51,6 +71,8 @@ int	main(int argc, char **argv)
 	t_list	**stack_a;
 	t_list	**stack_b;
 
+	if (argc < 2)
+		exit (0);
 	ft_check_args(argc, argv);
 	stack_a = (t_list **)malloc(sizeof(t_list));
 	stack_b = (t_list **)malloc(sizeof(t_list));
@@ -63,12 +85,6 @@ int	main(int argc, char **argv)
 	*stack_a = 0;
 	*stack_b = 0;
 	stack_init(stack_a, argc, argv);
-	if (is_sorted(stack_a))
-	{
-		stack_free(stack_a);
-		stack_free(stack_b);
-		return (0);
-	}
 	stack_sort(stack_a, stack_b);
 	stack_free(stack_a);
 	stack_free(stack_b);
