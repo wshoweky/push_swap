@@ -1,48 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wshoweky <wshoweky@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/15 11:59:43 by wshoweky          #+#    #+#             */
+/*   Updated: 2025/07/17 17:30:35 by wshoweky         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	reverse_rotate(t_list **stack)
+static int	get_max_bits(t_list **stack)
 {
-	t_list	*first;
-	t_list	*last;
+	t_list	*node;
+	int		max_index;
+	int		max_bits;
 
-	if (ft_lstsize(*stack) < 2)
-		return (0);
-	first = *stack;
-	last = ft_lstlast(*stack);
-	while (first)
+	node = *stack;
+	max_index = node->index;
+	max_bits = 0;
+	while (node)
 	{
-		if (first->next->next == 0)
-		{
-			first->next = 0;
-			break ;
-		}
-		first = first->next;
+		if (node->index > max_index)
+			max_index = node->index;
+		node = node->next;
 	}
-	last->next = *stack;
-	*stack = last;
-	return (1);
+	while (max_index >> max_bits)
+		max_bits++;
+	return (max_bits);
 }
 
-int	rra(t_list **stack_a)
+void	radix_sort(t_list **stack_a, t_list **stack_b)
 {
-	if (!reverse_rotate(stack_a))
-		return (0);
-	ft_putendl_fd("rra", 1);
-	return (1);
-}
+	int		i;
+	int		n;
+	int		size;
+	int		max_bits;
 
-int	rrb(t_list **stack_b)
-{
-	if (!reverse_rotate(stack_b))
-		return (0);
-	ft_putendl_fd("rrb", 1);
-	return (1);
-}
-
-int	rrr(t_list **stack_a, t_list **stack_b)
-{
-	if (!(reverse_rotate(stack_a)) || !(reverse_rotate(stack_b)))
-		return (0);
-	ft_putendl_fd("rrr", 1);
-	return (1);
+	i = 0;
+	size = ft_lstsize(*stack_a);
+	max_bits = get_max_bits(stack_a);
+	while (i < max_bits)
+	{
+		n = 0;
+		while (n < size)
+		{
+			if (((*stack_a)->index >> i) & 1)
+				ra(stack_a);
+			else
+				pb(stack_b, stack_a);
+			n++;
+		}
+		while (ft_lstsize(*stack_b))
+			pa(stack_a, stack_b);
+		i++;
+	}
 }
