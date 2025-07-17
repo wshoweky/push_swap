@@ -49,7 +49,22 @@ static int	ft_isnum(char *num)
 	}
 	return (1);
 }
-
+/*
+static int ft_isspace(char *str)
+{
+	int i = 0;
+    //if (!str)
+      //  return (1);
+    while (str[i])
+    {
+        if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' &&
+            str[i] != '\r' && str[i] != '\v' && str[i] != '\f')
+            return 0;
+        i++;
+    }
+    return 1;
+}
+*/
 void	ft_check_args(int argc, char **argv)
 {
 	int			i;
@@ -58,11 +73,18 @@ void	ft_check_args(int argc, char **argv)
 
 	i = 0;
 	if (argc == 2)
-		args = ft_split(argv[1], 32);
+	{
+		args = ft_split(argv[1], 32);// if (!args || !args[0] || !*args[0])
+		if (!args || !args[0] || !*args[0])
+		{
+			ft_free(args);
+			ft_error("Error");
+		}
+	}
 	else
 	{
 		i++;
-		args = argv;
+		args = argv; //args = &argv[1];
 	}
 	while (args[i])
 	{
