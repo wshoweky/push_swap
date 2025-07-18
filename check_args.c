@@ -49,7 +49,57 @@ static int	ft_isnum(char *num)
 	}
 	return (1);
 }
+
+static void	check_nbr(char **args, long long nbr, int argc, int i)
+{
+	while (args[i])
+	{
+		nbr = ft_atoi(args[i]);
+		if (!ft_isnum(args[i]) || !ft_duplicates(nbr, args, i))
+		{
+			if (argc == 2)
+				ft_free(args);
+			ft_error("Error");
+		}
+		i++;
+	}
+}
+
+void	ft_check_args(int argc, char **argv)
+{
+	int			i;
+	char		**args;
+	long long	nbr;
+
+	i = 0;
+	nbr = 0;
+	if (argc < 2)
+		exit (0);
+	if (argc == 2)
+	{
+		args = ft_split(argv[1], 32);
+		if (!args || !args[0] || !*args[0])
+		{
+			ft_free(args);
+			ft_error("Error");
+		}
+	}
+	else
+	{
+		i++;
+		args = &argv[1];
+	}
+	check_nbr(args, nbr, argc, i);
+	if (argc == 2)
+		ft_free(args);
+}
 /*
+		if (!ft_duplicates(tmp, args, i))
+		{
+			if (argc == 2)
+				ft_free(args);
+			ft_error("Error");
+		}			
 static int ft_isspace(char *str)
 {
 	int i = 0;
@@ -64,49 +114,6 @@ static int ft_isspace(char *str)
     }
     return 1;
 }
-*/
-void	ft_check_args(int argc, char **argv)
-{
-	int			i;
-	char		**args;
-	long long	tmp;
-
-	i = 0;
-	if (argc == 2)
-	{
-		args = ft_split(argv[1], 32);// if (!args || !args[0] || !*args[0])
-		if (!args || !args[0] || !*args[0])
-		{
-			ft_free(args);
-			ft_error("Error");
-		}
-	}
-	else
-	{
-		i++;
-		args = argv; //args = &argv[1];
-	}
-	while (args[i])
-	{
-		tmp = ft_atoi(args[i]);
-		if (!ft_isnum(args[i]) || !ft_duplicates(tmp, args, i))
-		{
-			if (argc == 2)
-				ft_free(args);
-			ft_error("Error");
-		}
-		i++;
-	}
-	if (argc == 2)
-		ft_free(args);
-}
-/*
-		if (!ft_duplicates(tmp, args, i))
-		{
-			if (argc == 2)
-				ft_free(args);
-			ft_error("Error");
-		}
 static int	ft_isnum(char *num)
 {
 	int	i;
