@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_free(char **args)
+void	ft_free_arg(char **args)
 {
 	int	i;
 
@@ -94,41 +94,3 @@ void	make_top(t_list **stack, int distance)
 			rra(stack);
 	}
 }
-/*
-void make_top_direct(t_list **stack, int distance)
-{
-    if (distance == 0 || !stack || !*stack)
-        return;
-    t_list *prev = NULL;
-    t_list *curr = *stack;
-    int i = 0;
-    // Find the node at 'distance'
-    while (curr && i < distance) {
-        prev = curr;
-        curr = curr->next;
-        i++;
-    }
-    if (!curr)
-        return; // distance out of bounds
-    // prev is the node before 'curr', curr is the node to move to top
-    if (prev)
-        prev->next = curr->next;
-    else
-        return; // already at top
-    // Move curr to the front
-    curr->next = *stack;
-    *stack = curr;
-}
-
-void print_stack_debug(t_list **stack, const char *label)
-{
-    t_list *node = *stack;
-    printf("%s: ", label);
-    while (node)
-    {
-        printf("[%d|%d] ", node->value, node->index);
-        node = node->next;
-    }
-    printf("\n");
-}
-*/

@@ -12,19 +12,6 @@
 
 #include "push_swap.h"
 
-t_list	*ft_lstnew(int value)
-{
-	t_list	*new;
-
-	new = (t_list *)malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->value = value;
-	new->index = -1;
-	new->next = NULL;
-	return (new);
-}
-
 static void	stack_init(t_list **stack_a, int argc, char **argv)
 {
 	t_list	*node;
@@ -47,21 +34,25 @@ static void	stack_init(t_list **stack_a, int argc, char **argv)
 	}
 	stack_index(stack_a);
 	if (argc == 2)
-		ft_free(args);
+		ft_free_arg(args);
 }
 
 static void	stack_sort(t_list **stack_a, t_list **stack_b)
 {
+	int size;
+
 	if (!stack_a || !*stack_a)
 		return ;
 	if (is_sorted(stack_a))
 	{
-		stack_free(stack_a);
-		stack_free(stack_b);
+		ft_free_ab(stack_a, stack_b);
 		exit (0);
 	}
-	if (ft_lstsize(*stack_a) <= 5)
+	size = ft_lstsize(*stack_a);
+	if (size <= 5)
 		simple_sort(stack_a, stack_b);
+	//else if (size >= 20 && size <= 100)
+	//	chunk_sort(stack_a, stack_b, 5); // 5 chunks for up to 100 elements
 	else
 		radix_sort(stack_a, stack_b);
 }
@@ -76,15 +67,15 @@ int	main(int argc, char **argv)
 	stack_b = (t_list **)malloc(sizeof(t_list));
 	if (!stack_a || !stack_b)
 	{
-		stack_free(stack_a);
-		stack_free(stack_b);
+		ft_free_ab(stack_a, stack_b);
 		return (0);
 	}
 	*stack_a = 0;
 	*stack_b = 0;
 	stack_init(stack_a, argc, argv);
+	print_stack_debug(stack_a, "Before sort");
 	stack_sort(stack_a, stack_b);
-	stack_free(stack_a);
-	stack_free(stack_b);
+	print_stack_debug(stack_a, "After sort");
+	ft_free_ab(stack_a, stack_b);
 	return (0);
 }

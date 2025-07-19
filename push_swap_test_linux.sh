@@ -114,12 +114,12 @@ do
   if [[ $line == "Error" ]]; then
   	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
   else
-  	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
+  	printf "${RED}4.[KO] ${DEF_COLOR}\n";
   	break
   fi
 done < test_check.txt
 else
-	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
+	printf "${RED}4.[KO] ${DEF_COLOR}\n";
 fi
 
 rm -rf test_check.txt
@@ -618,12 +618,12 @@ do
   if [[ $line == "Error" ]]; then
   	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
   else
-  	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+  	printf "${RED}32.[KO] ${DEF_COLOR}\n";
   	break
   fi
 done < test_check.txt
 else
-	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+	printf "${RED}32.[KO] ${DEF_COLOR}\n";
 fi
 
 ARG="+"
@@ -634,12 +634,12 @@ do
   if [[ $line == "Error" ]]; then
   	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
   else
-  	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+  	printf "${RED}33.[KO] ${DEF_COLOR}\n";
   	break
   fi
 done < test_check.txt
 else
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${RED}33.[KO] ${DEF_COLOR}\n";
 fi
 
 rm -rf test_check.txt
@@ -1124,15 +1124,15 @@ S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}32.[OK] ${DEF_COLOR}";
 else
-	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+	printf "${RED}32.[KO]${DEF_COLOR}";
 fi
 
 ARG="2 4 1 3";
 N=$(./push_swap $ARG | wc -l)
 if [ $N -lt 13 ]; then
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${GREEN}33.[OK] ${DEF_COLOR}";
 else
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${RED}33.[KO]${DEF_COLOR}";
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
@@ -1612,15 +1612,15 @@ S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}32.[OK] ${DEF_COLOR}";
 else
-	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+	printf "${RED}32.[KO]${DEF_COLOR}";
 fi
 
 ARG="1 4 5 3 2";
 N=$(./push_swap $ARG | wc -l)
 if [ $N -lt 13 ]; then
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${GREEN}33.[OK] ${DEF_COLOR}";
 else
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${RED}33.[KO]${DEF_COLOR}";
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
@@ -4720,12 +4720,12 @@ do
   if [[ $line == "Error" ]]; then
   	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
   else
-  	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+  	printf "${RED}32.[KO] ${DEF_COLOR}\n";
   	break
   fi
 done < test_check.txt
 else
-	printf "${GREEN}32.[OK] ${DEF_COLOR}\n";
+	printf "${RED}32.[KO] ${DEF_COLOR}\n";
 fi
 
 rm -rf test_check.txt
@@ -4737,12 +4737,12 @@ do
   if [[ $line == "Error" ]]; then
   	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
   else
-  	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+  	printf "${RED}33.[KO] ${DEF_COLOR}\n";
   	break
   fi
 done < test_check.txt
 else
-	printf "${GREEN}33.[OK] ${DEF_COLOR}\n";
+	printf "${RED}33.[KO] ${DEF_COLOR}\n";
 fi
 
 ./checker "--123 1 321" 2> test_check.txt > /dev/null

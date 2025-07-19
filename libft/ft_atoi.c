@@ -15,7 +15,7 @@
 long	ft_atoi(const char *str)
 {
 	long	i;
-	long	number;
+	long long	number;
 	int		sign;
 
 	i = 0;
@@ -34,5 +34,9 @@ long	ft_atoi(const char *str)
 		number = (number * 10) + (str[i] - '0');
 		i++;
 	}
+	if (number > 2147483647)
+		return (2147483648);
+	else if (number < -2147483648)
+		return (-2147483649);
 	return (number * sign);
 }
