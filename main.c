@@ -39,7 +39,7 @@ static void	stack_init(t_list **stack_a, int argc, char **argv)
 
 static void	stack_sort(t_list **stack_a, t_list **stack_b)
 {
-	int size;
+	int	size;
 
 	if (!stack_a || !*stack_a)
 		return ;
@@ -51,8 +51,6 @@ static void	stack_sort(t_list **stack_a, t_list **stack_b)
 	size = ft_lstsize(*stack_a);
 	if (size <= 5)
 		simple_sort(stack_a, stack_b);
-	//else if (size >= 20 && size <= 100)
-	//	chunk_sort(stack_a, stack_b, 5); // 5 chunks for up to 100 elements
 	else
 		radix_sort(stack_a, stack_b);
 }
@@ -73,9 +71,9 @@ int	main(int argc, char **argv)
 	*stack_a = 0;
 	*stack_b = 0;
 	stack_init(stack_a, argc, argv);
-	print_stack_debug(stack_a, "Before sort");
+	//print_stack_debug(stack_a, "Before sort");
 	stack_sort(stack_a, stack_b);
-	print_stack_debug(stack_a, "After sort");
+	//print_stack_debug(stack_a, "After sort");
 	ft_free_ab(stack_a, stack_b);
 	return (0);
 }

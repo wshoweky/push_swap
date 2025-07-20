@@ -12,37 +12,13 @@
 
 #include "push_swap.h"
 
-static int	get_max_bits(t_list **stack)
-{
-	/*
-	t_list	*node;
-	int		max_index;
-	int		max_bits;
-
-	node = *stack;
-	max_index = node->index;
-	max_bits = 0;
-	while (node)
-	{
-		if (node->index > max_index)
-			max_index = node->index;
-		node = node->next;
-	}
-		*/
-	int	max_index;
-	int	max_bits;
-
-	max_bits = 0;
-	max_index = ft_lstsize(*stack) - 1;
-	while (max_index >> max_bits)
-		max_bits++;
-	return (max_bits);
-}
-
 static void	radix_sort_stack_b(t_list **stack_a, t_list **stack_b, int bit)
 {
-	int b_size = ft_lstsize(*stack_b);
-	int n = 0;
+	int	b_size;
+	int	n;
+
+	n = 0;
+	b_size = ft_lstsize(*stack_b);
 	while (n < b_size)
 	{
 		if (((*stack_b)->index >> bit) & 1)
@@ -61,21 +37,23 @@ void	radix_sort(t_list **stack_a, t_list **stack_b)
 	int		max_bits;
 
 	i = 0;
-	max_bits = get_max_bits(stack_a);
+	max_bits = 0;
+	while ((ft_lstsize(*stack_a) - 1) >> max_bits)
+		max_bits++;
 	while (i < max_bits)
 	{
-		size = ft_lstsize(*stack_a);
 		n = 0;
+		size = ft_lstsize(*stack_a);
 		while (n++ < size)
 		{
 			if (((*stack_a)->index >> i) & 1)
 				ra(stack_a);
 			else
-				pb(stack_b, stack_a);			
-		}		
+				pb(stack_b, stack_a);
+		}
 		if (++i < max_bits)
-			radix_sort_stack_b(stack_a, stack_b, i);		
-	}	
+			radix_sort_stack_b(stack_a, stack_b, i);
+	}
 	while (ft_lstsize(*stack_b))
 		pa(stack_a, stack_b);
 }

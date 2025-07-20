@@ -33,8 +33,12 @@ static int	ft_duplicates(int num, char **argv, int i)
 static int	ft_isnum(char *num)
 {
 	int			i;
+	long long	nbr;
 
 	i = 0;
+	nbr = ft_atoi(num);
+	if (nbr > INT_MAX || INT_MIN > nbr)
+		return (0);
 	if (num[i] == '-' || num[i] == '+')
 		i++;
 	while (num[i])
@@ -46,10 +50,23 @@ static int	ft_isnum(char *num)
 	return (1);
 }
 
-static void	ft_check_nbr(char **args, long long nbr, int argc, int i)
+static void	ft_check_nbr(char **args, int argc)
 {
+	int			i;
+	long long	nbr;
+
+	i = 0;
+	nbr = 0;
+	if (argc > 2)
+		i++;
 	while (args[i])
 	{
+		if (ft_strlen(args[i]) > 11)
+		{
+			if (argc == 2)
+				ft_free_arg(args);
+			ft_error("Error");
+		}
 		nbr = ft_atoi(args[i]);
 		if (!ft_isnum(args[i]) || !ft_duplicates(nbr, args, i))
 		{
@@ -63,15 +80,11 @@ static void	ft_check_nbr(char **args, long long nbr, int argc, int i)
 
 void	ft_check_args(int argc, char **argv)
 {
-	int			i;
 	char		**args;
-	long long	nbr;
 
-	i = 0;
-	nbr = 0;
 	if (argc < 2)
 		exit (0);
-	if (argc == 2)
+	else if (argc == 2)
 	{
 		args = ft_split(argv[1], 32);
 		if (!args || !args[0] || !*args[0])
@@ -81,12 +94,9 @@ void	ft_check_args(int argc, char **argv)
 		}
 	}
 	else
-	{
-		i++;
-		args = &argv[1];
-	}
-	ft_check_overflow(args, argc);
-	ft_check_nbr(args, nbr, argc, i);
+		args = argv;
+	//ft_check_overflow(args, argc);
+	ft_check_nbr(args, argc);
 	if (argc == 2)
 		ft_free_arg(args);
 }

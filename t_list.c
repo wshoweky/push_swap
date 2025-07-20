@@ -67,3 +67,11 @@ int	ft_lstsize(t_list *node)
 	}
 	return (n);
 }
+
+void	ft_free_ab(t_list **a, t_list **b)
+{
+	if (a)
+		stack_free(a);
+	if (b)
+		stack_free(b);
+}

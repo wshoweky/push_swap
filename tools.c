@@ -1,5 +1,19 @@
 #include "push_swap.h"
 
+void	print_stack_debug(t_list **stack, const char *label)
+{
+	t_list	*node;
+
+	node = *stack;
+	printf("%s: ", label);
+	while (node)
+	{
+		printf("[%d|%d] ", node->value, node->index);
+		node = node->next;
+	}
+	printf("\n");
+}
+/*
 static int  ft_isok(char *str)
 {
     long long   n;
@@ -47,26 +61,6 @@ void	ft_check_overflow(char **args, int argc)
 	}	
 }
 
-void	ft_free_ab(t_list **a, t_list **b)
-{
-	if (a)
-		stack_free(a);
-	if (b)
-		stack_free(b);
-}
-
-void print_stack_debug(t_list **stack, const char *label)
-{
-    t_list *node = *stack;
-    printf("%s: ", label);
-    while (node)
-    {
-        printf("[%d|%d] ", node->value, node->index);
-        node = node->next;
-    }
-    printf("\n");
-}
-/*
 int atolong(const char *ptr, int *overflow)
 {
 	int		sign;
