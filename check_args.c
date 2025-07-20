@@ -37,10 +37,17 @@ static int	ft_isnum(char *num)
 
 	i = 0;
 	nbr = ft_atoi(num);
+	if (ft_strlen(num) > 11)
+	{
+		if (nbr > INT_MAX || INT_MIN > nbr)
+			return (0);
+	}
 	if (nbr > INT_MAX || INT_MIN > nbr)
 		return (0);
 	if (num[i] == '-' || num[i] == '+')
 		i++;
+	if (!num[i])
+		return (0);
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
@@ -61,12 +68,6 @@ static void	ft_check_nbr(char **args, int argc)
 		i++;
 	while (args[i])
 	{
-		if (ft_strlen(args[i]) > 11)
-		{
-			if (argc == 2)
-				ft_free_arg(args);
-			ft_error("Error");
-		}
 		nbr = ft_atoi(args[i]);
 		if (!ft_isnum(args[i]) || !ft_duplicates(nbr, args, i))
 		{
@@ -95,7 +96,6 @@ void	ft_check_args(int argc, char **argv)
 	}
 	else
 		args = argv;
-	//ft_check_overflow(args, argc);
 	ft_check_nbr(args, argc);
 	if (argc == 2)
 		ft_free_arg(args);
