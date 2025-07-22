@@ -33,15 +33,15 @@ The only allowed operations are:
      - The algorithm processes the stack bit by bit, starting from the least significant bit (LSB) to the most significant bit (MSB).
      - For each bit position:
       - **Step 1 (A to B):**
-        - For every element in stack A, check the current bit:
-          - If the bit is 0, push the element to stack B (`pb`).
-          - If the bit is 1, rotate stack A (`ra`).
+       - For every element in stack A, check the current bit:
+        - If the bit is 0, push the element to stack B (`pb`).
+        - If the bit is 1, rotate stack A (`ra`).
         - This separates elements based on the current bit: 0-bits go to B, 1-bits stay in A (but rotated).
       - **Step 2 (B to A):**
         - For the next bit position, process stack B:
-          - For every element in B, check the next bit:
-            - If the bit is 1, push the element back to A (`pa`).
-            - If the bit is 0, rotate stack B (`rb`).
+         - For every element in B, check the next bit:
+          - If the bit is 1, push the element back to A (`pa`).
+          - If the bit is 0, rotate stack B (`rb`).
         - This further filters and moves elements back to A as soon as they are ready for the next bit pass.
      - This alternation between A and B continues for each bit position, efficiently filtering and moving elements closer to their sorted position with each pass.
 
