@@ -85,11 +85,12 @@ rra
 - 📚 [Notion push_swap Guide](https://suspectedoceano.notion.site/push_swap-ee2c472005d54d978412bfc37a1ab3e7)
 - 📖 [42 Cursus push_swap Guide (GitBook)](https://42-cursus.gitbook.io/guide/2-rank-02/push_swap)
 - 📝 [Push_swap Tutorial (Medium)](https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e)
-- 🎥 [Radix Sort Algorithm Introduction in 5 Minutes (YouTube)](https://www.youtube.com/watch?v=XiuSW_mEn7g)
+- 🎥 [Radix Sort Algorithm Introduction (YouTube)](https://www.youtube.com/watch?v=XiuSW_mEn7g)
 - 💻 [Reference Implementation by hu8813 (GitHub)](https://github.com/hu8813/push_swap)
 - 🧪 [Push-Swap-Tester by gemartin99 (GitHub)](https://github.com/gemartin99/Push-Swap-Tester)
-- 👀 [push_swap42 Visualizer (Web)](https://push-swap42-visualizer.vercel.app/)
 - 🖥️ [push_swap_visualizer by o-reo (GitHub)](https://github.com/o-reo/push_swap_visualizer)
+- 👀 [push_swap42 Visualizer (Web)](https://push-swap42-visualizer.vercel.app/)
+
 
 ---
 
